@@ -27,7 +27,7 @@ profile_picture_path = ProfilePicturePath()
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, default=1)
     category = {
         'manager': 'Manager',
         'engineer': 'Engineer',
@@ -41,6 +41,7 @@ class Profile(models.Model):
     position = models.CharField(max_length=100)
     phone_number = models.IntegerField(null=True, blank=True)
     profile_picture = models.FileField(upload_to=profile_picture_path, blank=True, null=True)
+    
     def __str__(self):
         return f"{self.user.username}"
 
