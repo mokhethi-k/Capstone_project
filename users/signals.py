@@ -4,11 +4,13 @@ from django.dispatch import receiver
 
 from .models import Profile
 
+#This function enable automatic user profile creation
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
 
+#This function enables unique username creation in case the first and last names already exists
 @receiver(pre_save, sender=User)
 def create_username(sender, instance, **kwargs):
     if not instance.username:
