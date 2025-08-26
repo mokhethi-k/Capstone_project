@@ -5,6 +5,7 @@ from .models import Profile
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+    user = serializers.HyperlinkedIdentityField(read_only=True, many=False, view_name='user-detail')
     class Meta:
         model = Profile
         fields = ['url', 'id', 'user', 'profile_picture']

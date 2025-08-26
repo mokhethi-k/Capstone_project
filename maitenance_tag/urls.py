@@ -19,10 +19,10 @@ from users import router as users_api_router
 from django.urls import path, include
 from django.conf import settings
 
-auth_api_urls = []
+auth_api_urls = [
+    path(r'verify/', include('rest_framework.urls')),
 
-if settings.DEBUG:
-    auth_api_urls.append(path(r'verify/', include('rest_framework.urls')))
+]
 
 api_url_patterns = [
     path(r'auth/', include(auth_api_urls)),
@@ -33,4 +33,5 @@ api_url_patterns = [
 urlpatterns = [
     path('api/', include(api_url_patterns)),
     path('admin/', admin.site.urls),
+
 ]
