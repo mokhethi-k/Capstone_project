@@ -1,15 +1,9 @@
 
 from rest_framework import serializers
 from .models import RepairTag
+from actions.serializers import RepairTagActionSerializer
 from actions.models import RepairTagAction
 from django.contrib.auth.models import User
-
-
-class RepairTagActionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = RepairTagAction
-        fields = ['id', 'assigned_to', 'assigned_by', 'evidence', 'status', 'completed_at', 'created_at']
-
 
 class RepairTagSerializer(serializers.ModelSerializer):
     actions = RepairTagActionSerializer(many=True, required=False)
@@ -17,7 +11,7 @@ class RepairTagSerializer(serializers.ModelSerializer):
     class Meta:
         model = RepairTag
         fields = ['id', 'department', 'created_by', 'area_found', 'repair_type', 
-                  'reason', 'priority', 'created_at', 'deadline', 'status', 'actions']
+                  'action', 'priority', 'created_at', 'deadline', 'status', 'actions']
 
     def create(self, validated_data):
   
