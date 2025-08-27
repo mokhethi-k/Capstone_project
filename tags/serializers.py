@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 
 class RepairTagSerializer(serializers.ModelSerializer):
     actions = RepairTagActionSerializer(many=True, required=False)
-
+    status = serializers.CharField(read_only=True)
     class Meta:
         model = RepairTag
         fields = ['id', 'url', 'department', 'area_found', 'repair_type', 
