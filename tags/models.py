@@ -39,7 +39,7 @@ class RepairTag(models.Model):
     )
     area_found = models.CharField(max_length=255)
     repair_type = models.CharField(max_length=50, choices=REPAIR_TYPE_CHOICES)
-    reason = models.TextField()
+    action = models.TextField()
     priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
     deadline = models.DateTimeField()
@@ -47,5 +47,5 @@ class RepairTag(models.Model):
 
 
     def __str__(self):
-        return f"{self.reason} ({self.status})"
+        return f"{self.action} ({self.status})"
 
