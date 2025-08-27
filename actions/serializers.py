@@ -5,5 +5,5 @@ from .models import RepairTagAction
 class RepairTagActionSerializer(serializers.ModelSerializer):
     class Meta:
         model = RepairTagAction
-        fields = ['id', 'assigned_to', 'assigned_by', 'evidence', 'status', 'complete_at', 'created_at']
+        fields = ['id', 'url', 'assigned_to', 'assigned_by', 'evidence', 'status', 'complete_at', 'created_at']
 
