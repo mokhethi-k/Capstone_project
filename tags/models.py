@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from users.models import Department
 
 
+
 class RepairTag(models.Model):
 
     PRIORITY_CHOICES = [
@@ -43,6 +44,7 @@ class RepairTag(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     deadline = models.DateTimeField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Not Started')
+
 
     def __str__(self):
         return f"{self.reason} ({self.status})"
