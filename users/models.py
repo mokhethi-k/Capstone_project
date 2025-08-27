@@ -2,9 +2,11 @@ import os
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.deconstruct import deconstructible
+ 
 
 class Department(models.Model):
     name = models.CharField(max_length=100) 
+    manager = models.OneToOneField("Profile", on_delete=models.SET_NULL, null=True, limit_choices_to={'specialization': 'Manager'}, related_name='managed_department')
 
 
     def __str__(self):
@@ -27,7 +29,7 @@ profile_picture_path = ProfilePicturePath()
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE, default=1)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, default=1, related_name='members')
     category = {
         'manager': 'Manager',
         'engineer': 'Engineer',
@@ -44,4 +46,9 @@ class Profile(models.Model):
     
     def __str__(self):
         return f"{self.user.username}"
+    
+
+
+
+
 
