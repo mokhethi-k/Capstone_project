@@ -27,11 +27,6 @@ router = DefaultRouter()
 router.register(r'repair-tags', RepairTagViewSet, basename="repairtag")
 router.register(r'repair-actions', RepairTagActionViewSet, basename="repairtagaction")
 
-tags_url_patterns = [
-    path(r'tags/', include(router.urls)),  
-    
-]
-
 
 auth_api_urls = [
     path(r'verify/', include('rest_framework.urls')),
@@ -40,8 +35,8 @@ auth_api_urls = [
 
 api_url_patterns = [
     path(r'auth/', include(auth_api_urls)),
-    path(r'', include(tags_url_patterns)),
     path(r'accounts/', include(users_api_router.router.urls)),
+    path(r'tags/', include(router.urls)),
 ]
 
 
