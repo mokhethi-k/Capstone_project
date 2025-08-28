@@ -11,7 +11,7 @@ class RepairTagSerializer(serializers.ModelSerializer):
     class Meta:
         model = RepairTag
         fields = ['id', 'url', 'department', 'area_found', 'repair_type', 
-                  'action', 'priority', 'created_at', 'deadline', 'status', 'actions']
+                  'action', 'assigned_to', 'priority', 'created_at', 'deadline', 'status', 'actions']
 
     def create(self, validated_data):
   

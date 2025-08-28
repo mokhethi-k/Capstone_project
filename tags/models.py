@@ -40,6 +40,12 @@ class RepairTag(models.Model):
     area_found = models.CharField(max_length=255)
     repair_type = models.CharField(max_length=50, choices=REPAIR_TYPE_CHOICES)
     action = models.TextField()
+    assigned_to = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="assigned_actions"
+    )
     priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
     deadline = models.DateTimeField()

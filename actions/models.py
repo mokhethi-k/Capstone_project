@@ -20,7 +20,7 @@ class RepairTagAction(models.Model):
         User,
         on_delete=models.SET_NULL,
         null=True,
-        related_name="assigned_actions"
+        related_name="assigned"
     )
     assigned_by = models.ForeignKey(
         User,
