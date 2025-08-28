@@ -8,8 +8,3 @@ class RepairTagViewSet(viewsets.ModelViewSet):
     serializer_class = RepairTagSerializer
     permission_classes = [permissions.IsAuthenticated]
     
-    def perform_create(self, serializer):
-        """
-        Automatically set created_by to the current user
-        """
-        serializer.save(created_by=self.request.user)

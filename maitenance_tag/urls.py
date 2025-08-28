@@ -24,8 +24,8 @@ from tags.views import RepairTagViewSet
 from actions.views import RepairTagActionViewSet
 
 router = DefaultRouter()
-router.register(r'repair-tags', RepairTagViewSet, basename="repairtag")
-router.register(r'repair-actions', RepairTagActionViewSet, basename="repairtagaction")
+router.register(r'tags', RepairTagViewSet, basename="repairtag")
+router.register(r'actions', RepairTagActionViewSet, basename="repairtagaction")
 
 
 auth_api_urls = [
@@ -36,7 +36,7 @@ auth_api_urls = [
 api_url_patterns = [
     path(r'auth/', include(auth_api_urls)),
     path(r'accounts/', include(users_api_router.router.urls)),
-    path(r'tags/', include(router.urls)),
+    path(r'', include(router.urls)),
 ]
 
 
