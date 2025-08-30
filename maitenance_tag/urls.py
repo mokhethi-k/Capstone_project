@@ -22,6 +22,7 @@ from django.conf import settings
 from rest_framework.routers import DefaultRouter
 from tags.views import RepairTagViewSet
 from actions.views import RepairTagActionViewSet
+from tags.views import dashboard_stats
 
 router = DefaultRouter()
 router.register(r'tags', RepairTagViewSet, basename="repairtag")
@@ -37,11 +38,13 @@ api_url_patterns = [
     path(r'auth/', include(auth_api_urls)),
     path(r'accounts/', include(users_api_router.router.urls)),
     path(r'', include(router.urls)),
+    path("dashboard/", dashboard_stats, name="dashboard"),
 ]
 
 
 urlpatterns = [
     path('api/', include(api_url_patterns)),
     path('admin/', admin.site.urls),
+    
 
 ]
