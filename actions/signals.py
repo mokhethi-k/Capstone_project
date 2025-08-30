@@ -1,25 +1,27 @@
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from .models import RepairTagAction
 from django.core.mail import send_mail
 from django.conf import settings
 
 
-'''@receiver(post_save, sender=RepairTagAction)
+@receiver([post_save, post_delete], sender=RepairTagAction)
 def update_tag_status(sender, instance, **kwargs):
     tag = instance.tag
- 
+    actions = tag.actions.all()
 
-    if tag:
-        if instance.status == "Completed":
-            tag.status = "Completed"
-        elif instance.status == "In Progress" and tag.status != "Completed":
-            tag.status = "In Progress"
-        else:
-            tag.status = "Not Started"
-        tag.save()
+    if actions.filter(status="In Progress").exists():
+        tag.status = "In Progress"
+    elif actions.filter(status="Not Started").exists():
+        tag.status = "Not Started"
+    elif actions.exists():
+        tag.status = "Completed"
+    else:
+        tag.status = "Not Started"  # no actions left
 
-  '''  
+    tag.save()
+
+
 
 @receiver(post_save, sender=RepairTagAction)
 def send_assignment_email(sender, instance, created, **kwargs):

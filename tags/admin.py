@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import RepairTag
-from users.models import Profile
+from django.contrib.auth.models import User
 
 # Register your models here.
 
@@ -24,5 +24,11 @@ class RepairTagAdmin(admin.ModelAdmin):
             if hasattr(request.user, "profile"):
                 obj.department = request.user.profile.department
         super().save_model(request, obj, form, change)
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "assigned_to" and not request.user.is_superuser:
+            if hasattr(request.user, "profile") and request.user.profile.department:
+                kwargs["queryset"] = User.objects.filter(profile__department=request.user.profile.department)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 admin.site.register(RepairTag, RepairTagAdmin)
