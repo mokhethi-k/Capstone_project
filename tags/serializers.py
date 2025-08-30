@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class RepairTagSerializer(serializers.ModelSerializer):
     actions = RepairTagActionSerializer(many=True, required=False)
     status = serializers.CharField(read_only=True)
-    created_by = serializers.HiddenField(default=serializers.CurrentUserDefault()) 
+    created_by = serializers.ReadOnlyField(source='created_by.username')  
     class Meta:
         model = RepairTag
         fields = ['id', 'url', 'department', 'created_by', 'area_found', 'repair_type', 

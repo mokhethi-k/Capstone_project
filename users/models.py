@@ -39,7 +39,7 @@ class Profile(models.Model):
         ('operator', 'Operator'),
         ('contractor', 'Contractor'),
     ]
-    specialization = models.CharField(max_length=100, choices=category, default='Operator')
+    specialization = models.CharField(max_length=100, choices=category, default='operator')
     position = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=15, null=True, blank=True)
     profile_picture = models.FileField(upload_to=profile_picture_path, blank=True, null=True)
