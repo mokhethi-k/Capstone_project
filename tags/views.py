@@ -46,7 +46,7 @@ class RepairTagViewSet(viewsets.ModelViewSet):
 def dashboard_stats(request):
     user = request.user
 
-    # base queryset restricted by department
+    # Base queryset restricted by department for non-superusers
     if user.is_superuser:
         qs = RepairTag.objects.all()
     elif hasattr(user, "profile") and user.profile.department:
@@ -54,11 +54,15 @@ def dashboard_stats(request):
     else:
         qs = RepairTag.objects.none()
 
+    # Convert annotated QuerySets to list of dicts for JSON response
+    def breakdown(queryset, field):
+        return list(queryset.values(field).annotate(count=Count('id')))
+
     stats = {
         "total_tags": qs.count(),
-        "status_breakdown": qs.values("status").annotate(count=Count("id")),
-        "priority_breakdown": qs.values("priority").annotate(count=Count("id")),
-        "repair_type_breakdown": qs.values("repair_type").annotate(count=Count("id")),
+        "status_breakdown": breakdown(qs, 'status'),
+        "priority_breakdown": breakdown(qs, 'priority'),
+        "repair_type_breakdown": breakdown(qs, 'repair_type'),
     }
 
     return Response(stats)

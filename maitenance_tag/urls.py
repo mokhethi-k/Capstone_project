@@ -15,7 +15,6 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from users import router as users_api_router
 from django.urls import path, include
 from django.conf import settings
 from users.views import UserViewSet, ProfileViewSet
@@ -39,9 +38,9 @@ auth_api_urls = [
 
 api_url_patterns = [
     path(r'auth/', include(auth_api_urls)),
-    #path(r'accounts/', include(users_api_router.router.urls)),
     path(r'', include(router.urls)),
-    path("dashboard/", dashboard_stats, name="dashboard"),
+    path('dashboard/', dashboard_stats, name="dashboard"),
+    
 ]
 
 

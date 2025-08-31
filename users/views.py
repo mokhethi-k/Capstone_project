@@ -2,8 +2,10 @@ from django.shortcuts import render
 from .serializers import UserSerializer, ProfileSerializer
 from django.contrib.auth.models import User
 from rest_framework import viewsets, mixins
-from .permissions import UserPermisions, IsProfileOwnweOrReadOnly
+from .permissions import UserPermisions, IsProfileOwnweOrReadOnly, IsSuperUserOrReadOnly
 from .models import Profile
+from rest_framework.exceptions import PermissionDenied
+
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -13,7 +15,10 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class ProfileViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.UpdateModelMixin):
-    permission_classes = [IsProfileOwnweOrReadOnly,]
     queryset = Profile.objects.all()
+    permission_classes = [IsProfileOwnweOrReadOnly, IsSuperUserOrReadOnly]
     serializer_class = ProfileSerializer
+
+
+
 

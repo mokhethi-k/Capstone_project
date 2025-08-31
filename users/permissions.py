@@ -25,3 +25,15 @@ class IsProfileOwnweOrReadOnly(permissions.BasePermission):
         if not request.user.is_anonymous:
             return request.user.profile == obj
         return False
+    
+
+class IsSuperUserOrReadOnly(permissions.BasePermission):
+    """
+    Superuser can edit any profile; others can only read.
+    """
+    def has_permission(self, request, view):
+        # Everyone can read
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        # Only superuser can write
+        return request.user and request.user.is_superuser
