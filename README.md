@@ -1,150 +1,78 @@
-Project Idea
-My capstone project is a Fitness Tracker API. The goal is to create a backend service that allows users to log their fitness activities, update or delete them, and view a detailed history of their workouts. This API will form the backbone of my full FitGirlsTracker app.
+# Maintenance Repair Tag System
 
-Key Features
-The API will include the following core functionalities:
-User registration and authentication (using Django’s authentication system)
+A Django REST Framework (DRF) application for managing maintenance and repair tags in an organization. This system enables users to create, assign, and track repair tags and actions, with department-based restrictions and superuser privileges.
 
+---
 
-Create, Read, Update, and Delete (CRUD) fitness activities
+## Features
 
+- **User Management**
+  - Users can view and update their own profiles.
+  - Superusers can edit all profiles.
+  - Department-based access for tags and actions.
 
-View workout history, filterable by activity type or date
+- **Repair Tags**
+  - Create, view, and track repair tags.
+  - Assign actions to users in the same department.
+  - Tag statuses: Open, In Progress, Completed.
+  - Priority levels and repair types.
 
+- **Actions**
+  - Automatically track who assigned an action (`assigned_by`).
+  - Upload evidence files or images.
+  - Action completion tracking.
+  - Action status reflect automatically in the tag
 
-View personal statistics (like number of workouts or most frequent activity)
+- **Dashboard**
+  - Department-based statistics.
+  - Total tags, status breakdown, priority breakdown, and repair type breakdown.
 
+- **Authentication**
+  - Session Authentication using DRF.
+  - Only authenticated users can interact with the API.
+  - Regular users:
+    - Can view and update their own profile.
+    - Can create and view tags and actions for users in their department.
+  - Superusers:
+    - Can view and edit all profiles.
+    - Full access to all repair tags and actions.
 
-Add optional activity goals or tags (e.g., “abs”, “booty”, “cardio”)
+---
 
+## Installation
 
-View activities by category or goal
+1. **Clone the repository**
+   ```bash
+   git clone git@github.com:mokhethi-k/Capstone_project.git
+   cd Capstone_project
 
 
+## Dependacies installation
+    pip install -r requirements.txt
 
-API (Optional)
-At this stage, I will create and use my own Django REST API to serve all the required data.
- If needed later, I may integrate the API Ninjas Exercise API to supplement the database with workout examples or expert routines.
 
-Planned Models and Structure
-Django Apps
-users – Handles user registration, login, and profile
+## Aplly migrations
+    python manage.py migrate
 
+## Create superuser
+    python manage.py createsuperuser
 
-workouts – Manages workout logging and history
+## Run the server
+    python manage.py runserver
 
+## Access the admin site
+    http://127.0.0.1:8000/admin/
+    
 
-goals – Allows users to add goals or tags to workouts (optional for Version 1)
+## API Endpoints
 
-
-Models (Basic Structure)
-User (extends Django’s AbstractUser)
-username
-
-
-email
-
-
-password
-
-
-age
-
-
-fitness_goal (optional)
-
-
-WorkoutActivity
-user (ForeignKey to User)
-
-
-activity_type (CharField)
-
-
-duration_minutes (IntegerField)
-
-
-date (DateField)
-
-
-notes (TextField, optional)
-
-
-goal_tag (CharField, optional)
-
-
-
-Planned Endpoints (Initial MVP)
-Endpoint
-Method
-Description
-/api/register/
-POST
-Create a new user
-/api/login/
-POST
-Login a user
-/api/activities/
-GET
-List all activities for logged-in user
-/api/activities/
-POST
-Log a new workout
-/api/activities/<id>/
-GET
-View one activity
-/api/activities/<id>/
-PUT
-Update a workout
-/api/activities/<id>/
-DELETE
-Delete a workout
-/api/history/
-GET
-View workout history (filter by goal or date)
-
-
-Project Timeline (5-Week Plan)
-Week
-Goal
-Week 1
-Set up project, initialize Django and apps, design models
-Week 2
-Build authentication (register/login/logout)
-Week 3
-Implement CRUD for workout activities
-Week 4
-Build filtering for activity history, add basic validations
-Week 5
-Polish API, test everything, document, and deploy to Heroku or PythonAnywhere
-
-
-Tools & Stack
-Backend Framework: Django + Django REST Framework
-
-
-Database: SQLite (locally), PostgreSQL (for deployment)
-
-
-Deployment: PythonAnywhere (free tier) or Heroku
-
-
-Version Control: Git and GitHub
-
-
-Testing: Django’s built-in test client
-
-
-
-Notes
-I will focus on writing clean, well-documented endpoints.
-
-
-Deployment will be part of the final milestone to simulate a real-world project.
-
-
-If time allows, I will explore Django filtering to enhance the /history/ endpoint.
-
-
-I plan to connect this API to my React-based FitGirlsTracker frontend in the next development phase.
+    | Endpoint            | Description                         |
+| ------------------- | ----------------------------------- |
+| `/api/users/`       | List or create users                |
+| `/api/profiles/`    | List or manage user profiles        |
+| `/api/tags/`        | List, create, and view repair tags  |
+| `/api/actions/`     | List and manage actions             |
+| `/api/dashboard/`   | Department-based dashboard stats    |
+| `/api/auth/login/`  | Login endpoint (DRF browsable auth) |
+| `/api/auth/logout/` | Logout endpoint                     |
 
