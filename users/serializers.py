@@ -8,7 +8,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     user = serializers.HyperlinkedIdentityField(read_only=True, many=False, view_name='user-detail')
     class Meta:
         model = Profile
-        fields = ['url', 'id', 'user', 'profile_picture']
+        fields = ['url', 'id', 'user', 'department', 'specialization', 'position', 'phone_number', 'profile_picture']
 
 class UserSerializer(serializers.ModelSerializer):
     #customising user creation
