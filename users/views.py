@@ -4,12 +4,12 @@ from django.contrib.auth.models import User
 from rest_framework import viewsets, mixins
 from .permissions import UserPermisions, IsProfileOwnweOrReadOnly, IsSuperUserOrReadOnly
 from .models import Profile
-from rest_framework.exceptions import PermissionDenied
+from rest_framework.permissions import IsAuthenticated
 
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    permission_classes = [UserPermisions,]
+    permission_classes = [UserPermisions, IsAuthenticated]
     queryset = User.objects.all()
     serializer_class  = UserSerializer
 
