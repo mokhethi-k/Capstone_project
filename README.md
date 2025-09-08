@@ -1,3 +1,7 @@
+# Superuser
+ - username: Mokhethi
+ -Password: ILoveProgramming
+
 # Maintenance Repair Tag System
 
 A Django REST Framework (DRF) application for managing maintenance and repair tags in an organization. This system enables users to create, assign, and track repair tags and actions, with department-based restrictions and superuser privileges.
