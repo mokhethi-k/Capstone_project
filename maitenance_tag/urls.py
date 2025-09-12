@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
-from users.views import UserViewSet, ProfileViewSet
+from users.views import UserViewSet, ProfileViewSet, RegisterView
 
 from rest_framework.routers import DefaultRouter
 from tags.views import RepairTagViewSet
@@ -38,6 +38,7 @@ auth_api_urls = [
 
 api_url_patterns = [
     path(r'auth/', include(auth_api_urls)),
+    path('register/', RegisterView.as_view(), name='register'),
     path(r'', include(router.urls)),
     path('dashboard/', dashboard_stats, name="dashboard"),
     
