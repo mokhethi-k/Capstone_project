@@ -79,4 +79,5 @@ A Django REST Framework (DRF) application for managing maintenance and repair ta
 | `/api/dashboard/`   | Department-based dashboard stats    |
 | `/api/auth/login/`  | Login endpoint (DRF browsable auth) |
 | `/api/auth/logout/` | Logout endpoint                     |
+| `/api/register/`    | user registration endpoint          |
 
