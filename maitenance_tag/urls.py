@@ -38,7 +38,7 @@ auth_api_urls = [
 
 api_url_patterns = [
     path(r'auth/', include(auth_api_urls)),
-    path('', RegisterView.as_view(), name='register'),
+    path('register/', RegisterView.as_view(), name='register'),
     path(r'', include(router.urls)),
     path('dashboard/', dashboard_stats, name="dashboard"),
     
